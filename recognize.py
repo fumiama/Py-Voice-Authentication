@@ -7,7 +7,7 @@ from scipy.io.wavfile import read
 import numpy as np
 from voice import extract_features
 
-def recognize():
+def recognize() -> bool:
     # Voice Authentication
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
@@ -77,7 +77,11 @@ def recognize():
     identity = speakers[pred]
    
     # if voice not recognized than terminate the process
-    if identity == 'unknown': print("Not Recognized! Try again...")
-    else: print( "Recognized as - ", identity)
+    if identity == 'unknown':
+        print("Not Recognized! Try again...")
+        return False
+    else:
+        print( "Recognized as - ", identity)
+        return True
 
 if __name__ == '__main__': recognize()
