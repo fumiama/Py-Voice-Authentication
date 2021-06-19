@@ -12,6 +12,7 @@ if __name__ == "__main__":
     if exists("gpio21"):
         print("GPIO 21 exported")
         chdir(cwd)
+        system("echo 0 > /sys/class/gpio/gpio21/value")
         fan_on = False
         while True:
             if recognize():
