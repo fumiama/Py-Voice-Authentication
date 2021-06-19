@@ -1,5 +1,5 @@
 from time import sleep
-from recognize import recognize
+import recognize
 from os import chdir, system, getcwd
 from os.path import exists
 
@@ -26,8 +26,10 @@ if __name__ == "__main__":
         system("echo 0 > /sys/class/gpio/gpio21/value")
         system("echo 0 > /sys/class/gpio/gpio13/value")
         fan_on = False
+        recognize.led_on = led_on
+        recognize.led_off = led_off
         while True:
-            if recognize():
+            if recognize.recognize():
                 if not fan_on:
                     fan_on = True
                     system("echo 1 > /sys/class/gpio/gpio21/value")
