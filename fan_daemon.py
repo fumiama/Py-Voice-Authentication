@@ -36,4 +36,4 @@ if __name__ == "__main__":
             elif fan_on:
                 system("echo 0 > /sys/class/gpio/gpio21/value")
                 fan_on = False
-            sleep(2)
+            sleep(8)
