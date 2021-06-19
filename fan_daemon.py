@@ -1,6 +1,13 @@
+from time import sleep
 from recognize import recognize
 from os import chdir, system, getcwd
 from os.path import exists
+
+def led_on():
+    system("echo 1 > /sys/class/gpio/gpio13/value")
+
+def led_off():
+    system("echo 0 > /sys/class/gpio/gpio13/value")
 
 if __name__ == "__main__":
     cwd = getcwd()
@@ -8,11 +15,14 @@ if __name__ == "__main__":
     if not exists("gpio21"):
         print("Exporting GPIO 21...")
         system("echo 21 > export")
+        system("echo 13 > export")
         system("echo out > gpio21/direction")
-    if exists("gpio21"):
-        print("GPIO 21 exported")
+        system("echo out > gpio13/direction")
+    if exists("gpio21") and exists("gpio13"):
+        print("GPIO ports exported")
         chdir(cwd)
         system("echo 0 > /sys/class/gpio/gpio21/value")
+        system("echo 0 > /sys/class/gpio/gpio13/value")
         fan_on = False
         while True:
             if recognize():
@@ -22,3 +32,4 @@ if __name__ == "__main__":
             elif fan_on:
                 system("echo 0 > /sys/class/gpio/gpio21/value")
                 fan_on = False
+            sleep(2)
