@@ -14,7 +14,11 @@ if __name__ == "__main__":
         chdir(cwd)
         fan_on = False
         while True:
-            if recognize() and not fan_on:
-                fan_on = True
-                system("echo 1 > /sys/class/gpio/gpio21/value")
+            if recognize():
+                if not fan_on:
+                    fan_on = True
+                    system("echo 1 > /sys/class/gpio/gpio21/value")
+            elif fan_on:
+                system("echo 0 > /sys/class/gpio/gpio21/value")
+                fan_on = False
             system("sleep 1")
