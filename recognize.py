@@ -1,3 +1,4 @@
+from fan_daemon import led_off, led_on
 import pyaudio
 import wave
 import os
@@ -7,7 +8,11 @@ from scipy.io.wavfile import read
 import numpy as np
 from voice import extract_features
 
+led_on = None
+led_off = None
+
 def recognize() -> bool:
+    global led_on, led_off
     # Voice Authentication
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
@@ -23,7 +28,7 @@ def recognize() -> bool:
                     rate=RATE, input=True,
                     frames_per_buffer=CHUNK)
 
-    if "led_on" in locals().keys():
+    if led_on != None:
         led_on()
         print("Turn on led.")
     time.sleep(2.0)
@@ -34,7 +39,7 @@ def recognize() -> bool:
         data = stream.read(CHUNK, exception_on_overflow=False)
         frames.append(data)
     print("finished recording")
-    if "led_off" in locals().keys():
+    if led_off != None:
         led_off()
         print("Turn off led.")
 
