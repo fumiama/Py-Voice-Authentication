@@ -14,7 +14,7 @@ def recognize() -> bool:
     RATE = 44100
     CHUNK = 512
     RECORD_SECONDS = 4
-    FILENAME = "./test.wav"
+    FILENAME = "/tmp/test.wav"
 
     audio = pyaudio.PyAudio()
    
