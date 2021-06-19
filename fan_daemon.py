@@ -4,10 +4,10 @@ from os import chdir, system, getcwd
 from os.path import exists
 
 def led_on():
-    system("echo 1 > /sys/class/gpio/gpio7/value")
+    system("echo 1 > /sys/class/gpio/gpio11/value")
 
 def led_off():
-    system("echo 0 > /sys/class/gpio/gpio7/value")
+    system("echo 0 > /sys/class/gpio/gpio11/value")
 
 if __name__ == "__main__":
     cwd = getcwd()
@@ -16,15 +16,15 @@ if __name__ == "__main__":
         print("Exporting GPIO 21...")
         system("echo 21 > export")
         system("echo out > gpio21/direction")
-    if not exists("gpio7"):
-        print("Exporting GPIO 7...")
-        system("echo 7 > export")
-        system("echo out > gpio7/direction")
-    if exists("gpio21") and exists("gpio7"):
+    if not exists("gpio11"):
+        print("Exporting GPIO 11...")
+        system("echo 11 > export")
+        system("echo out > gpio11/direction")
+    if exists("gpio21") and exists("gpio11"):
         print("GPIO ports exported")
         chdir(cwd)
         system("echo 0 > /sys/class/gpio/gpio21/value")
-        system("echo 0 > /sys/class/gpio/gpio7/value")
+        system("echo 0 > /sys/class/gpio/gpio11/value")
         fan_on = False
         recognize.led_on = led_on
         recognize.led_off = led_off
