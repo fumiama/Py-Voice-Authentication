@@ -16,4 +16,4 @@ if __name__ == "__main__":
             if recognize() and not fan_on:
                 fan_on = True
                 system("echo 1 > value")
-            system("sleep 10")
+            system("sleep 1")
