@@ -1,7 +1,7 @@
 from time import sleep
 import recognize
 from os import chdir, system, getcwd, fork, setsid, dup2, wait
-from path import exists
+from os.path import exists
 import sys
 
 def led_on():
