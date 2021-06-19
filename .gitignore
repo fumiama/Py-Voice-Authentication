@@ -3,3 +3,5 @@ __pycache__
 
 test.wav
 voice_database/*
+.vscode
+.DS_Store
