@@ -23,7 +23,7 @@ def recognize() -> bool:
                     rate=RATE, input=True,
                     frames_per_buffer=CHUNK)
 
-    if led_on != None: led_on()
+    if led_on in locals().keys(): led_on()
     time.sleep(2.0)
     print("recording...")
     frames = []
@@ -32,7 +32,7 @@ def recognize() -> bool:
         data = stream.read(CHUNK, exception_on_overflow=False)
         frames.append(data)
     print("finished recording")
-    if led_off != None: led_off()
+    if led_off in locals().keys(): led_off()
 
 
     # stop Recording
