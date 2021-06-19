@@ -9,6 +9,12 @@ def led_on():
 def led_off():
     system("echo 0 > /sys/class/gpio/gpio13/value")
 
+def fan_run():
+    system("echo 1 > /sys/class/gpio/gpio26/value")
+
+def fan_stop():
+    system("echo 0 > /sys/class/gpio/gpio26/value")
+
 if __name__ == "__main__":
     cwd = getcwd()
     chdir("/sys/class/gpio/")
@@ -23,8 +29,8 @@ if __name__ == "__main__":
     if exists("gpio26") and exists("gpio13"):
         print("GPIO ports exported")
         chdir(cwd)
-        system("echo 0 > /sys/class/gpio/gpio26/value")
-        system("echo 0 > /sys/class/gpio/gpio13/value")
+        fan_stop()
+        led_off()
         fan_on = False
         recognize.led_on = led_on
         recognize.led_off = led_off
@@ -32,8 +38,8 @@ if __name__ == "__main__":
             if recognize.recognize():
                 if not fan_on:
                     fan_on = True
-                    system("echo 1 > /sys/class/gpio/gpio26/value")
+                    fan_run()
             elif fan_on:
-                system("echo 0 > /sys/class/gpio/gpio26/value")
+                fan_stop()
                 fan_on = False
             sleep(8)
