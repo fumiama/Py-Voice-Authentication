@@ -15,8 +15,10 @@ if __name__ == "__main__":
     if not exists("gpio21"):
         print("Exporting GPIO 21...")
         system("echo 21 > export")
-        system("echo 13 > export")
         system("echo out > gpio21/direction")
+    if not exists("gpio13"):
+        print("Exporting GPIO 13...")
+        system("echo 13 > export")
         system("echo out > gpio13/direction")
     if exists("gpio21") and exists("gpio13"):
         print("GPIO ports exported")
