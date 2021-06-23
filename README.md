@@ -17,7 +17,6 @@ Voice Biometrics Authentication using GMM.
    ```
      python3 delete_user.py
    ```
-___
 ## Voice Authentication
    *For Voice recognition, **GMM (Gaussian Mixture Model)** is used to train on extracted MFCC features from audio wav           file.*<br><br>
 
